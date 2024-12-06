@@ -1,4 +1,5 @@
 /*
+git submodule update --init
 cargo run --example usage
 */
 

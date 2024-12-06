@@ -1,4 +1,5 @@
 /*
+git submodule update --init
 wget https://github.com/thewh1teagle/aec-rs/releases/download/audio-files/rec.wav
 wget https://github.com/thewh1teagle/aec-rs/releases/download/audio-files/echo.wav
 wget https://github.com/thewh1teagle/aec-rs/releases/download/audio-files/voice.wav
@@ -57,5 +58,5 @@ fn main() {
         }
     }
 
-    println!("Output written to {}", out_path);
+    println!("Created {}", out_path);
 }

@@ -30,6 +30,9 @@ fn main() {
     let lib_src = Path::new(&manifest_dir).join("speexdsp");
     let lib_dst = out_dir.join("speexdsp");
     let profile = env::var("SPEEXDSP_LIB_PROFILE").unwrap_or("Release".to_string());
+
+    println!("cargo:rerun-if-changed={}", lib_src.display());
+
     if !lib_dst.exists() {
         copy_folder(&lib_src, &lib_dst);
     }
