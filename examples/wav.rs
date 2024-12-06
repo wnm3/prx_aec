@@ -1,11 +1,14 @@
 /*
-cargo run --example usage echo.wav rec.wav cancelled.wav
+wget https://github.com/thewh1teagle/aec-rs/releases/download/audio-files/rec.wav
+wget https://github.com/thewh1teagle/aec-rs/releases/download/audio-files/echo.wav
+wget https://github.com/thewh1teagle/aec-rs/releases/download/audio-files/voice.wav
+cargo run --example wav rec.wav echo.wav cancelled.wav
 */
 
 fn main() {
     // 16kHz mono int16 same length
-    let echo_path = std::env::args().nth(1).expect("Please specify echo path");
-    let rec_path = std::env::args().nth(2).expect("Please specify rec path");
+    let rec_path = std::env::args().nth(1).expect("Please specify echo path");
+    let echo_path = std::env::args().nth(2).expect("Please specify rec path");
     let out_path = std::env::args().nth(3).expect("Please specify out path");
 
     // Read echo samples
