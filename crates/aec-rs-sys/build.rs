@@ -5,23 +5,22 @@ use cmake::Config;
 
 fn copy_folder(src: &Path, dst: &Path) {
     std::fs::create_dir_all(dst).expect("Failed to create dst directory");
-    if cfg!(unix) {
-        std::process::Command::new("cp")
-            .arg("-rf")
-            .arg(src)
-            .arg(dst.parent().unwrap())
-            .status()
-            .expect("Failed to execute cp command");
-    }
 
-    if cfg!(windows) {
-        std::process::Command::new("robocopy.exe")
-            .arg("/e")
-            .arg(src)
-            .arg(dst)
-            .status()
-            .expect("Failed to execute robocopy command");
-    }
+    let command = if cfg!(windows) { "robocopy.exe" } else { "cp" };
+    let args = if cfg!(windows) {
+        vec!["/e", src.to_str().unwrap(), dst.to_str().unwrap()]
+    } else {
+        vec![
+            "-rf",
+            src.to_str().unwrap(),
+            dst.parent().unwrap().to_str().unwrap(),
+        ]
+    };
+
+    std::process::Command::new(command)
+        .args(args)
+        .status()
+        .expect("Failed to copy folder");
 }
 
 fn main() {
