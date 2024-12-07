@@ -62,6 +62,7 @@ jobs:
           cp crates/libaec/binds/* "${{ matrix.build-dir }}/"
           cp -f "target/release/${{ matrix.target }}/libaec.a" "${{ matrix.build-dir }}/" || :
           cp -f "target/release/${{ matrix.target }}/libaec.so" "${{ matrix.build-dir }}/" || :
+            cp -f "target/release/${{ matrix.target }}/libaec.dylib" "${{ matrix.build-dir }}/" || :
           cp -f "target/release/${{ matrix.target }}/libaec.lib" "${{ matrix.build-dir }}/" || :
           cp -f "target/release/${{ matrix.target }}/libaec.dll" "${{ matrix.build-dir }}/" || :
 
