@@ -10,8 +10,11 @@ requires-python = ">=3.6"
 dependencies = []
 
 [build-system]
-requires = ["flit_core >=3.2,<4"]
-build-backend = "flit_core.buildapi"
+requires = ["hatchling"]
+build-backend = "hatchling.build"
 
-[tool.flit.external-data]
-directory = "data"
+[tool.hatch.build.targets.wheel.hooks.custom]
+path = "build.py"
+
+[tool.hatch.build.targets.sdist]
+ignore-vcs = true
