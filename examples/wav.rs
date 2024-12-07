@@ -3,60 +3,59 @@ git submodule update --init
 wget https://github.com/thewh1teagle/aec-rs/releases/download/audio-files/rec.wav
 wget https://github.com/thewh1teagle/aec-rs/releases/download/audio-files/echo.wav
 wget https://github.com/thewh1teagle/aec-rs/releases/download/audio-files/voice.wav
-cargo run --example wav rec.wav echo.wav cancelled.wav
+cargo run --example wav rec.wav echo.wav output.wav
 */
+use aec_rs::Aec;
+use hound::{WavReader, WavWriter};
 
 fn main() {
-    // 16kHz mono int16 same length
-    let rec_path = std::env::args().nth(1).expect("Please specify echo path");
-    let echo_path = std::env::args().nth(2).expect("Please specify rec path");
+    // File paths for input and output
+    let rec_path = std::env::args().nth(1).expect("Please specify rec path");
+    let echo_path = std::env::args().nth(2).expect("Please specify echo path");
     let out_path = std::env::args().nth(3).expect("Please specify out path");
 
-    // Read echo samples
-    let mut reader = hound::WavReader::open(echo_path).unwrap();
-    let echo_samples: Vec<i16> = reader.samples::<i16>().map(|s| s.unwrap()).collect();
+    // Read the WAV files
+    let mut rec_reader = WavReader::open(rec_path).unwrap();
+    let mut echo_reader = WavReader::open(echo_path).unwrap();
 
-    // Read recorded samples
-    let mut reader = hound::WavReader::open(rec_path).unwrap();
-    let rec_samples: Vec<i16> = reader.samples::<i16>().map(|s| s.unwrap()).collect();
+    // Get the WAV file specs (assuming both files have the same spec)
+    let spec = rec_reader.spec();
+    let mut out_writer = WavWriter::create(&out_path, spec).unwrap();
 
-    let sample_rate = 16000; // 16kHz
-    let filter_length = (sample_rate as f32 * 0.1).round() as i32; // 0.1s
-    let mut aec = aec_rs::Aec::new(sample_rate, filter_length);
-    aec.set_sample_rate(sample_rate);
+    let sample_rate = 16_000; // 16kHz
+    let frame_size = 160; // 0.01
+    let filter_length = 1600; // 0.1
 
-    let frame_size = aec.get_frame_size();
+    // Initialize Aec struct
+    let aec = Aec::new(frame_size, filter_length, sample_rate);
 
-    // Prepare output WAV writer
-    let spec = hound::WavSpec {
-        channels: 1,
-        sample_rate: sample_rate as u32,
-        bits_per_sample: 16,
-        sample_format: hound::SampleFormat::Int,
-    };
-    let mut writer = hound::WavWriter::create(&out_path, spec).unwrap();
+    // Initialize buffers with the frame size
+    let mut rec_buffer = vec![0i16; frame_size];
+    let mut echo_buffer = vec![0i16; frame_size];
+    let mut out_buffer = vec![0i16; frame_size];
 
-    // Process samples frame by frame
-    let mut output_samples = Vec::new();
-    let mut input_frame = vec![0; frame_size as usize];
-    let mut reference_frame = vec![0; frame_size as usize];
+    // Read the entire WAV samples into Vec<i16>
+    let rec_samples: Vec<i16> = rec_reader
+        .samples::<i16>()
+        .collect::<Result<_, _>>()
+        .unwrap();
+    let echo_samples: Vec<i16> = echo_reader
+        .samples::<i16>()
+        .collect::<Result<_, _>>()
+        .unwrap();
 
-    for i in (0..rec_samples.len()).step_by(frame_size as usize) {
-        let end = usize::min(i + frame_size as usize, rec_samples.len());
+    let num_samples = rec_samples.len().min(echo_samples.len());
 
-        // Fill frames
-        input_frame[..end - i].copy_from_slice(&rec_samples[i..end]);
-        reference_frame[..end - i].copy_from_slice(&echo_samples[i..end]);
-
-        // Apply AEC cancellation
-        let cancelled = aec.cancel(&mut input_frame, &mut reference_frame);
-        output_samples.extend_from_slice(&cancelled);
-
-        // Write to output WAV file
-        for &sample in &cancelled {
-            writer.write_sample(sample).unwrap();
+    for i in 0..(num_samples / frame_size) {
+        // Calculate the slice range for the current frame and copy it into the buffers
+        rec_buffer.copy_from_slice(&rec_samples[i * frame_size..(i + 1) * frame_size]);
+        echo_buffer.copy_from_slice(&echo_samples[i * frame_size..(i + 1) * frame_size]);
+        // Apply echo cancellation
+        aec.cancel_echo(&mut rec_buffer, &mut echo_buffer, &mut out_buffer);
+        // Write the processed frame to the output file
+        for &sample in &out_buffer {
+            out_writer.write_sample(sample).unwrap();
         }
     }
-
     println!("Created {}", out_path);
 }
