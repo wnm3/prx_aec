@@ -6,6 +6,6 @@ cd aec-rs
 cargo build
 ```
 
-Useful demo website:
+Useful website for comparesion:
 
 https://fjiang9.github.io/NKF-AEC/
