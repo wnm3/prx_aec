@@ -1,19 +1,31 @@
 import ctypes
 from ctypes import POINTER, c_size_t, c_int32, c_bool, c_int16
 import platform
+import os
+
+
+def load_library():
+    # Get the directory of the current file
+    current_dir = os.path.dirname(os.path.abspath(__file__))
+    try:
+        # Load the shared library based on the platform
+        if platform.system() == "Windows":
+            lib = ctypes.CDLL(os.path.join(current_dir, "libaec.dll"))
+        elif platform.system() == "Linux":
+            lib = ctypes.CDLL(os.path.join(current_dir, "libaec.so"))
+        elif platform.system() == "Darwin":
+            lib = ctypes.CDLL(os.path.join(current_dir, "libaec.dylib"))
+        else:
+            raise OSError("Unsupported platform")
+
+        return lib
+    except OSError as e:
+        print(f"Error loading shared library: {e}")
+        return None
+
 
 # Load the shared library
-try:
-    if platform.system() == "Windows":
-        lib = ctypes.CDLL("libaec.dll")
-    elif platform.system() == "Linux":
-        lib = ctypes.CDLL("libaec.so")
-    elif platform.system() == "Darwin":
-        lib = ctypes.CDLL("libaec.dylib")
-    else:
-        raise OSError("Unsupported platform")
-except OSError as e:
-    raise RuntimeError("Failed to load libaec: " + str(e))
+lib = load_library()
 
 
 # Define the Aec structure (opaque pointer)

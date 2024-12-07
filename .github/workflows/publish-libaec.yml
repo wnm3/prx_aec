@@ -1,0 +1,80 @@
+name: Build and Package libaec C API
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - platform: "macos-latest" # for Arm-based Macs (M1 and above)
+            args: "--target aarch64-apple-darwin"
+            build-dir: "libaec-osx-aarch64"
+            archive: "tar"
+            target: "aarch64-apple-darwin"
+
+          - platform: "macos-latest" # for Intel-based Macs
+            args: "--target x86_64-apple-darwin"
+            build-dir: "libaec-osx-x86-64"
+            archive: "tar"
+            target: "x86_64-apple-darwin"
+
+          - platform: "ubuntu-22.04" # Ubuntu 22.04 x86_64
+            args: ""
+            build-dir: "libaec-linux-x86-64"
+            archive: "tar"
+            target: "x86_64-unknown-linux-gnu"
+
+          - platform: "windows-latest" # Windows x86_64
+            args: "--target x86_64-pc-windows-msvc"
+            build-dir: "libaec-win-x86-64"
+            archive: "zip"
+            target: "x86_64-pc-windows-msvc"
+
+    runs-on: ${{ matrix.platform }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install Rust stable
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: ${{ matrix.target }}
+
+      - name: Rust cache
+        uses: swatinem/rust-cache@v2
+
+      - name: Set up build directory
+        run: mkdir -p ${{ matrix.build-dir }}
+
+      - name: Build libaec
+        run: cargo build -p libaec --release ${{ matrix.args }}
+
+      - name: Copy files
+        run: |
+          # Copy header
+          cp crates/libaec/libaec.h "${{ matrix.build-dir }}/"
+          cp -f "target/release/libaec.a" "${{ matrix.build-dir }}/"
+          cp -f "target/release/libaec.so" "${{ matrix.build-dir }}/"
+          cp -f "target/release/libaec.lib" "${{ matrix.build-dir }}/"
+          cp -f "target/release/libaec.dll" "${{ matrix.build-dir }}/"
+
+        shell: bash
+
+      - name: Create archive
+        run: |
+          if [[ "${{ matrix.archive }}" == "tar" ]]; then
+            tar -czvf ${{ matrix.build-dir }}.tar.gz ${{ matrix.build-dir }}
+          elif [[ "${{ matrix.archive }}" == "zip" ]]; then
+            zip -r ${{ matrix.build-dir }}.zip ${{ matrix.build-dir }}
+          fi
+        shell: bash
+
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: libaec-${{ matrix.platform }}
+          path: ${{ matrix.build-dir }}.* # .tar.gz or .zip

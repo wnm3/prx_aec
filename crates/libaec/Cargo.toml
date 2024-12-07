@@ -7,6 +7,7 @@ edition = "2021"
 aec-rs = { path = "../../", version = "0.1.0" }
 
 [lib]
+name = "aec"
 crate-type = ["cdylib", "staticlib"]
 
 [build-dependencies]

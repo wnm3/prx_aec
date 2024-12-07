@@ -9,7 +9,7 @@ import soundfile as sf
 import numpy as np
 import sys
 import pyaudio
-from aec import Aec  # Assuming the AEC (Echo Cancellation) module is available
+from libaec.binds.aec import Aec
 import time
 
 # Parameters
