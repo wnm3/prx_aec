@@ -23,8 +23,8 @@ fn main() {
     let mut out_writer = WavWriter::create(&out_path, spec).unwrap();
 
     let sample_rate = 16_000; // 16kHz
-    let frame_size = 160; // 0.01
-    let filter_length = 1600; // 0.1
+    let frame_size = 160; // 0.01s
+    let filter_length = 1600; // 0.1s
 
     // Initialize Aec struct
     let aec = Aec::new(frame_size, filter_length, sample_rate);

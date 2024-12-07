@@ -5,8 +5,8 @@ cargo run --example usage
 
 fn main() {
     let sample_rate = 16000; // 16kHz
-    let frame_size = 160; // 0.01
-    let filter_length = 1600; // 0.1
+    let frame_size = 160; // 0.01s
+    let filter_length = 1600; // 0.1s
     let aec = aec_rs::Aec::new(sample_rate, filter_length, sample_rate as _);
 
     let mut input_frame: Vec<i16> = vec![0; frame_size];
