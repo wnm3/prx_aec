@@ -88,4 +88,5 @@ jobs:
           gh release upload $latestTag ${{ matrix.build-dir }}.* --clobber
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
+        shell: bash
 
