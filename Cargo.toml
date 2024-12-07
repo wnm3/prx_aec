@@ -1,5 +1,5 @@
 [workspace]
-members = ["crates/aec-rs-sys"]
+members = ["crates/aec-rs-sys", "crates/libaec"]
 
 [package]
 name = "aec-rs"
