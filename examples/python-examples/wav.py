@@ -1,13 +1,11 @@
 """
-cargo build -p libaec --release
-cp -rf ../../../target/release/liblibaec.dylib libaec.dylib
-pip install numpy soundfile
+pip install pyaec numpy soundfile
 wget https://github.com/thewh1teagle/aec-rs/releases/download/audio-files/rec.wav
 wget https://github.com/thewh1teagle/aec-rs/releases/download/audio-files/echo.wav
 python3 wav.py rec.wav echo.wav output.wav
 """
 
-from libaec.binds.aec import Aec
+from pyaec import Aec
 import soundfile as sf
 import sys
 import numpy as np

@@ -1,5 +1,5 @@
 """
-pip install PyAudio soundfile numpy
+pip install pyaec PyAudio soundfile numpy
 wget https://github.com/thewh1teagle/aec-rs/releases/download/audio-files/song.wav
 python microphone.py song.wav off.wav off
 python microphone.py song.wav on.wav on
@@ -9,7 +9,7 @@ import soundfile as sf
 import numpy as np
 import sys
 import pyaudio
-from libaec.binds.aec import Aec
+from pyaec import Aec
 import time
 
 # Parameters
