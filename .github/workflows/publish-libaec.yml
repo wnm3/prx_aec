@@ -59,8 +59,6 @@ jobs:
         run: |
           # Headers
           cp crates/libaec/libaec.h "${{ matrix.build-dir }}/"
-          # Bindings
-          cp crates/libaec/binds/* "${{ matrix.build-dir }}/"
           # Unix
           cp -f "target/${{ matrix.target }}/release/libaec.a" "${{ matrix.build-dir }}/" || :
           cp -f "target/${{ matrix.target }}/release/libaec.so" "${{ matrix.build-dir }}/" || :
