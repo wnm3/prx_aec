@@ -57,15 +57,17 @@ jobs:
 
       - name: Copy files
         run: |
-          # Copy header
+          # Headers
           cp crates/libaec/libaec.h "${{ matrix.build-dir }}/"
+          # Bindings
           cp crates/libaec/binds/* "${{ matrix.build-dir }}/"
+          # Unix
           cp -f "target/${{ matrix.target }}/release/libaec.a" "${{ matrix.build-dir }}/" || :
           cp -f "target/${{ matrix.target }}/release/libaec.so" "${{ matrix.build-dir }}/" || :
           cp -f "target/${{ matrix.target }}/release/libaec.dylib" "${{ matrix.build-dir }}/" || :
-          cp -f "target/${{ matrix.target }}/release/libaec.lib" "${{ matrix.build-dir }}/" || :
-          cp -f "target/${{ matrix.target }}/release/libaec.dll" "${{ matrix.build-dir }}/" || :
-
+          # Windows
+          cp -f "target/${{ matrix.target }}/release/aec.lib" "${{ matrix.build-dir }}/" || :
+          cp -f "target/${{ matrix.target }}/release/aec.dll" "${{ matrix.build-dir }}/" || :
         shell: bash
 
       - name: Create archive
