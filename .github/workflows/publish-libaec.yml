@@ -79,5 +79,5 @@ jobs:
       - name: Upload build artifact
         uses: actions/upload-artifact@v4
         with:
-          name: libaec-${{ matrix.platform }}
+          name: libaec-${{ matrix.target }}
           path: ${{ matrix.build-dir }}.* # .tar.gz or .zip
