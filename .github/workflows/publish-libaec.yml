@@ -87,5 +87,5 @@ jobs:
           latestTag=$(gh release view --json tagName --jq '.tagName')
           gh release upload $latestTag ${{ matrix.build-dir }}.* --clobber
         env:
-          GH_TOKEN: ${{ github.token }}
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
 
