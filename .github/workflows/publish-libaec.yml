@@ -73,7 +73,7 @@ jobs:
           if [[ "${{ matrix.archive }}" == "tar" ]]; then
             tar -czvf ${{ matrix.build-dir }}.tar.gz ${{ matrix.build-dir }}
           elif [[ "${{ matrix.archive }}" == "zip" ]]; then
-            zip -r ${{ matrix.build-dir }}.zip ${{ matrix.build-dir }}
+            7z a ${{ matrix.build-dir }}.zip ${{ matrix.build-dir }}
           fi
         shell: bash
 
