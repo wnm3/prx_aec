@@ -4,7 +4,7 @@ cp -rf ../../../target/release/liblibaec.dylib libaec.dylib
 pip install numpy soundfile
 wget https://github.com/thewh1teagle/aec-rs/releases/download/audio-files/rec.wav
 wget https://github.com/thewh1teagle/aec-rs/releases/download/audio-files/echo.wav
-python3 main.py rec.wav echo.wav output.wav
+python3 wav.py rec.wav echo.wav output.wav
 """
 
 from aec import Aec
