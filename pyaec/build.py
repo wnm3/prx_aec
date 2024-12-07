@@ -22,9 +22,9 @@ class SpecialBuildHook(BuildHookInterface):
         # py3-none-win-amd64
         # py3-none-linux_x86_64
         # py3-none-macosx_14_0_x86_64
-        env_wheel_tag = os.getenv("WHEEL_TAG")
-        if env_wheel_tag:
-            build_data["tag"] = env_wheel_tag
-        else:
-            # Strict tag to OS and Python version
-            build_data["infer_tag"] = True
+        # env_wheel_tag = os.getenv("WHEEL_TAG")
+        # if env_wheel_tag:
+        #     build_data["tag"] = env_wheel_tag
+        # else:
+        #     # Strict tag to OS and Python version
+        #     build_data["infer_tag"] = True
