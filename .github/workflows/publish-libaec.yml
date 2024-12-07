@@ -38,6 +38,8 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+        with:
+          submodules: "true"
 
       - name: Install Rust stable
         uses: dtolnay/rust-toolchain@stable
@@ -55,13 +57,20 @@ jobs:
 
       - name: Copy files
         run: |
-          # Copy header
+          # Headers
           cp crates/libaec/libaec.h "${{ matrix.build-dir }}/"
-          cp -f "target/release/libaec.a" "${{ matrix.build-dir }}/"
-          cp -f "target/release/libaec.so" "${{ matrix.build-dir }}/"
-          cp -f "target/release/libaec.lib" "${{ matrix.build-dir }}/"
-          cp -f "target/release/libaec.dll" "${{ matrix.build-dir }}/"
+          # Unix
+          cp -f "target/${{ matrix.target }}/release/libaec.a" "${{ matrix.build-dir }}/" || :
+          cp -f "target/${{ matrix.target }}/release/libaec.so" "${{ matrix.build-dir }}/" || :
+          cp -f "target/${{ matrix.target }}/release/libaec.dylib" "${{ matrix.build-dir }}/" || :
 
+          # Linux?
+          cp -f "target/release/libaec.a" "${{ matrix.build-dir }}/" || :
+          cp -f "target/release/libaec.so" "${{ matrix.build-dir }}/" || :
+
+          # Windows
+          cp -f "target/${{ matrix.target }}/release/aec.lib" "${{ matrix.build-dir }}/" || :
+          cp -f "target/${{ matrix.target }}/release/aec.dll" "${{ matrix.build-dir }}/" || :
         shell: bash
 
       - name: Create archive
@@ -69,12 +78,15 @@ jobs:
           if [[ "${{ matrix.archive }}" == "tar" ]]; then
             tar -czvf ${{ matrix.build-dir }}.tar.gz ${{ matrix.build-dir }}
           elif [[ "${{ matrix.archive }}" == "zip" ]]; then
-            zip -r ${{ matrix.build-dir }}.zip ${{ matrix.build-dir }}
+            7z a ${{ matrix.build-dir }}.zip ${{ matrix.build-dir }}
           fi
         shell: bash
 
-      - name: Upload build artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: libaec-${{ matrix.platform }}
-          path: ${{ matrix.build-dir }}.* # .tar.gz or .zip
+      - name: Uplaod to releases
+        run: |
+          latestTag=$(gh release view --json tagName --jq '.tagName')
+          gh release upload $latestTag ${{ matrix.build-dir }}.* --clobber
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+        shell: bash
+
