@@ -9,3 +9,12 @@ cargo build
 Useful website for comparesion:
 
 https://fjiang9.github.io/NKF-AEC/
+
+## Publish
+
+```console
+cd crates/aec-rs-sys
+cargo publish
+cd ../../
+cargo publish
+```
