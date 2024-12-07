@@ -79,8 +79,8 @@ jobs:
           fi
         shell: bash
 
-      - name: Upload build artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: libaec-${{ matrix.target }}
-          path: ${{ matrix.build-dir }}.* # .tar.gz or .zip
+      - name: Uplaod to releases
+        run: |
+          latestTag=$(gh release view --json tagName --jq '.tagName')
+          gh release upload $latestTag ${{ matrix.build-dir }}.* --clobber
+
