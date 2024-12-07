@@ -59,10 +59,10 @@ jobs:
         run: |
           # Copy header
           cp crates/libaec/libaec.h "${{ matrix.build-dir }}/"
-          cp -f "target/release/libaec.a" "${{ matrix.build-dir }}/"
-          cp -f "target/release/libaec.so" "${{ matrix.build-dir }}/"
-          cp -f "target/release/libaec.lib" "${{ matrix.build-dir }}/"
-          cp -f "target/release/libaec.dll" "${{ matrix.build-dir }}/"
+          cp -f "target/release/libaec.a" "${{ matrix.build-dir }}/" || :
+          cp -f "target/release/libaec.so" "${{ matrix.build-dir }}/" || :
+          cp -f "target/release/libaec.lib" "${{ matrix.build-dir }}/" || :
+          cp -f "target/release/libaec.dll" "${{ matrix.build-dir }}/" || :
 
         shell: bash
 
