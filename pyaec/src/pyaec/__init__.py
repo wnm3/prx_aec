@@ -11,7 +11,7 @@ def load_library():
             if platform.system() == "Windows"
             else ".so" if platform.system() == "Linux" else ".dylib"
         )
-
+        # Same dir as this file
         lib_path = os.path.join(os.path.dirname(__file__), lib_name)
 
         lib = ctypes.CDLL(lib_path)

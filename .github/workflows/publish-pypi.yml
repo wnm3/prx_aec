@@ -5,12 +5,45 @@ on:
 
 jobs:
   publish:
-    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - platform: "macos-latest" # for Arm-based Macs (M1 and above)
+            archive: "libaec-osx-aarch64.tar.gz"
+
+          - platform: "macos-latest" # for Intel-based Macs
+            archive: "libaec-osx-x86-64.tar.gz"
+
+          - platform: "ubuntu-22.04" # Ubuntu 22.04 x86_64
+            archive: "libaec-linux-x86-64.tar.gz"
+
+          - platform: "windows-latest" # Windows x86_64
+            archive: "libaec-win-x86-64.zip"
+
+    runs-on: ${{ matrix.platform }}
+
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v4
 
       - name: Install uv
         uses: astral-sh/setup-uv@v4
+
+      - name: Prepare libaec
+        run: |
+          # Download the archive
+          curl -LO https://github.com/thewh1teagle/aec-rs/releases/latest/download/${{ matrix.archive }}
+          # Extract based on file extension
+          if [[ "${{ matrix.archive }}" == *.tar.gz ]]; then
+            tar -xzf "${{ matrix.archive }}" -C .
+          elif [[ "${{ matrix.archive }}" == *.zip ]]; then
+            7z x "${{ matrix.archive }}" -o"libaec"
+          fi
+          # Copy appropriate shared libraries to the target directory
+          extracted_dir=$(find . -maxdepth 1 -type d -name 'libaec*' | head -n 1)
+          find "$extracted_dir" -type f \( -name "*.dll" -o -name "*.dylib" -o -name "*.so" \) -exec cp {} pyaec/src/pyaec/ \;
+        shell: bash
 
       - name: Build and publish
         run: |
