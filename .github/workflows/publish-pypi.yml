@@ -9,17 +9,21 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - platform: "macos-latest" # for Arm-based Macs (M1 and above)
+          - platform: "macos-latest" # macOS arm64
             archive: "libaec-osx-aarch64.tar.gz"
             wheel-tag: "py3-none-macosx_11_0_arm64"
 
-          - platform: "macos-latest" # for Intel-based Macs
+          - platform: "macos-latest" # macOS x86-64
             archive: "libaec-osx-x86-64.tar.gz"
             wheel-tag: "py3-none-macosx_10_12_x86_64"
 
-          - platform: "ubuntu-22.04" # Ubuntu 22.04 x86_64
+          - platform: "ubuntu-22.04" # Linux x86_64
             archive: "libaec-linux-x86-64.tar.gz"
             wheel-tag: "py3-none-manylinux_2_17_x86_64.manylinux2014_x86_64"
+
+          - platform: "ubuntu-22.04" # Linux aarch64
+            archive: "libaec-linux-aarch64.tar.gz"
+            wheel-tag: "py3-none-manylinux_2_28_aarch64"
 
           - platform: "windows-latest" # Windows x86_64
             archive: "libaec-win-x86-64.zip"
