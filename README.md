@@ -1,7 +1,7 @@
 # aec-rs
 
-[![PyPi Version](https://img.shields.io/pypi/v/pyaec?color=00aa00&logo=python)](https://pypi.org/project/pyaec/)
-[![Crates](https://img.shields.io/crates/v/aec-rs?logo=rust)](https://crates.io/crates/aec-rs/)
+[![Crates](https://img.shields.io/crates/v/aec-rs?logo=rust&color=F07B3C)](https://crates.io/crates/aec-rs/)
+[![PyPi Version](https://img.shields.io/pypi/v/pyaec?color=36719F&logo=python)](https://pypi.org/project/pyaec/)
 
 Acoustic echo cancellation in Rust based on [speexdsp](https://github.com/xiph/speexdsp)
 
