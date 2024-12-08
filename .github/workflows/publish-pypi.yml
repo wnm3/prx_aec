@@ -48,6 +48,8 @@ jobs:
       - name: Build and publish
         run: |
           uv build
+          # prevent duplicate
+          rm -f dist/*.tar.gz
           uv publish
         working-directory: pyaec
         env:
