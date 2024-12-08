@@ -1,4 +1,4 @@
-name: Build and Package libaec C API
+name: Publish libaec
 
 on:
   workflow_dispatch:
@@ -89,4 +89,3 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
         shell: bash
-
