@@ -4,7 +4,7 @@ version = 3
 
 [[package]]
 name = "aec-rs"
-version = "0.1.0"
+version = "1.0.0"
 dependencies = [
  "aec-rs-sys",
  "hound",
@@ -12,7 +12,7 @@ dependencies = [
 
 [[package]]
 name = "aec-rs-sys"
-version = "0.1.0"
+version = "1.0.0"
 dependencies = [
  "bindgen",
  "cmake",
@@ -269,7 +269,7 @@ checksum = "830d08ce1d1d941e6b30645f1a0eb5643013d835ce3779a5fc208261dbe10f55"
 
 [[package]]
 name = "libaec"
-version = "0.1.0"
+version = "1.0.0"
 dependencies = [
  "aec-rs",
  "cbindgen",

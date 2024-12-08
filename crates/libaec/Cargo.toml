@@ -1,10 +1,10 @@
 [package]
 name = "libaec"
-version = "0.1.0"
+version = "1.0.0"
 edition = "2021"
 
 [dependencies]
-aec-rs = { path = "../../", version = "0.1.0" }
+aec-rs = { path = "../../", version = "1.0.0" }
 
 [lib]
 name = "aec"

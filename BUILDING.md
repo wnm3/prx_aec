@@ -10,7 +10,7 @@ Useful website for comparesion:
 
 https://fjiang9.github.io/NKF-AEC/
 
-## Publish
+## Publish crates
 
 ```console
 cd crates/aec-rs-sys
