@@ -7,9 +7,9 @@ Acoustic echo cancellation in Rust based on [speexdsp](https://github.com/xiph/s
 
 ## Features
 
-- 🎤 Echo cancellation with a simple function call
+- 🎶 Echo cancellation with a simple function call
 - 🌀 Noise suppression for cleaner audio
-- ⏱️ Optimized for realtime performance
+- 🔧 Optimized for realtime performance
 - 🦀 Rust and 🐍 Python support
 - 🔗 Easy integration with C/C++ (or any other language) via C API
 - 📦 Precompiled library and C header files available in the [releases](https://github.com/thewh1teagle/aec-rs/releases/latest)
