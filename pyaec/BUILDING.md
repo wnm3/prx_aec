@@ -4,9 +4,8 @@ Use [uv](https://astral.sh/blog/uv)
 
 ```console
 cargo build -p libaec --release
-mkdir data
-cp -rf ../target/release/libaec.dylib data
-uv build
+cp -rf ../target/release/libaec.dylib src/pyaec/
+WHEEL_TAG="py3-none-macosx_11_0_arm64" uv build
 ```
 
 Publish
