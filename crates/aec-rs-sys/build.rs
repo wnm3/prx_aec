@@ -41,6 +41,10 @@ fn main() {
     if target.contains("android") {
         clang_target = "armv8-linux-androideabi".to_string();
     }
+    if target.contains("riscv64gc-unknown-linux-gnu") {
+        // https://github.com/rust-lang/rust-bindgen/issues/2136
+        clang_target = "riscv64-unknown-linux-gnu".to_string();
+    }
 
     let mut bindings = bindgen::Builder::default().header("wrapper.h");
 
