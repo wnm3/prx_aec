@@ -2,25 +2,24 @@ import ctypes
 from ctypes import POINTER, c_size_t, c_int32, c_bool, c_int16
 import platform
 import os
-import sys
 
 
 def load_library():
-    # Get the directory of the current file
     try:
-        # Load the shared library based on the platform
-        if platform.system() == "Windows":
-            lib = ctypes.CDLL(os.path.join(sys.prefix, "libaec.dll"))
-        elif platform.system() == "Linux":
-            lib = ctypes.CDLL(os.path.join(sys.prefix, "libaec.so"))
-        elif platform.system() == "Darwin":
-            lib = ctypes.CDLL(os.path.join(sys.prefix, "libaec.dylib"))
-        else:
-            raise OSError("Unsupported platform")
+        lib_name = "libaec" + (
+            ".dll"
+            if platform.system() == "Windows"
+            else ".so" if platform.system() == "Linux" else ".dylib"
+        )
+
+        lib_path = os.path.join(os.path.dirname(__file__), lib_name)
+
+        lib = ctypes.CDLL(lib_path)
 
         return lib
+
     except OSError as e:
-        print(f"Error loading shared library: {e}")
+        print(f"Error loading shared library from {lib_path}: {e}")
         return None
 
 
