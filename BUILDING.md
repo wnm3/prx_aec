@@ -44,7 +44,7 @@ Build
 cargo build --release --target aarch64-apple-ios
 ```
 
-# Building pyaec (Python)
+## Building pyaec (Python)
 
 Use [uv](https://astral.sh/blog/uv)
 
