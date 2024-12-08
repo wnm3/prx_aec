@@ -1,4 +1,6 @@
 """
+This example cancel the echo.wav sound from rec.wav recording and save it to output.wav
+
 pip install pyaec numpy soundfile
 wget https://github.com/thewh1teagle/aec-rs/releases/download/audio-files/rec.wav
 wget https://github.com/thewh1teagle/aec-rs/releases/download/audio-files/echo.wav

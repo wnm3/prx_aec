@@ -1,4 +1,6 @@
 """
+This example play song.wav in the speakers and recording microphone to output.wav while cancel the song from the microphone input.
+
 pip install pyaec PyAudio soundfile numpy
 wget https://github.com/thewh1teagle/aec-rs/releases/download/audio-files/song.wav
 python microphone.py song.wav off.wav off
