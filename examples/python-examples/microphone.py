@@ -1,5 +1,6 @@
 """
 This example play song.wav in the speakers and recording microphone to output.wav while cancel the song from the microphone input.
+Depending on your microphone and system, you may need to modify filter_length
 
 pip install pyaec PyAudio soundfile numpy
 wget https://github.com/thewh1teagle/aec-rs/releases/download/audio-files/song.wav
@@ -15,9 +16,9 @@ from pyaec import Aec
 import time
 
 # Parameters
-frame_size = 160
-filter_length = 1600
-sample_rate = 16000
+frame_size = 160 # 0.01s
+sample_rate = 16000 # 16kHz
+filter_length = int(sample_rate * 0.4) # 0.4s
 aec = Aec(frame_size, filter_length, sample_rate, True)
 
 # Input and output paths from command line arguments
