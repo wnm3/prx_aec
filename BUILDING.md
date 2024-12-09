@@ -1,7 +1,7 @@
 # Building
 
 ```console
-git clone https://github.com/thewh1teagle/aec-rs --recursive
+git clone https://github.com/thewh1teagle/aec --recursive
 cd aec-rs
 cargo build
 ```

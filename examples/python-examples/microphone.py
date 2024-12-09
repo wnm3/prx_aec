@@ -3,7 +3,7 @@ This example play song.wav in the speakers and recording microphone to output.wa
 Depending on your microphone and system, you may need to modify filter_length
 
 pip install pyaec PyAudio soundfile numpy
-wget https://github.com/thewh1teagle/aec-rs/releases/download/audio-files/song.wav
+wget https://github.com/thewh1teagle/aec/releases/download/audio-files/song.wav
 python microphone.py song.wav off.wav off
 python microphone.py song.wav on.wav on
 """
