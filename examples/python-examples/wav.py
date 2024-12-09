@@ -13,9 +13,9 @@ import sys
 import numpy as np
 
 rec_path, echo_path, out_path = sys.argv[1:]
-frame_size = 160
-filter_length = 1600
-sample_rate = 16000
+frame_size = 160 # 0.01s
+filter_length = 1600 # 0.1s
+sample_rate = 16000 # kHz
 aec = Aec(frame_size, filter_length, sample_rate, True)
 
 rec_samples, _ = sf.read(rec_path, dtype="int16")
