@@ -1,4 +1,4 @@
-# Aec
+# aec
 
 [![Crates](https://img.shields.io/crates/v/aec-rs?logo=rust&color=F07B3C)](https://crates.io/crates/aec-rs/)
 [![PyPi Version](https://img.shields.io/pypi/v/pyaec?color=36719F&logo=python)](https://pypi.org/project/pyaec/)
