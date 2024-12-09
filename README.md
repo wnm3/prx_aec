@@ -1,4 +1,4 @@
-# aec-rs
+# Aec
 
 [![Crates](https://img.shields.io/crates/v/aec-rs?logo=rust&color=F07B3C)](https://crates.io/crates/aec-rs/)
 [![PyPi Version](https://img.shields.io/pypi/v/pyaec?color=36719F&logo=python)](https://pypi.org/project/pyaec/)
@@ -17,7 +17,7 @@ Acoustic echo cancellation in Rust based on [speexdsp](https://github.com/xiph/s
 ## Supported Platforms
 
 | Platform    | Architecture | Supported ✔️ |
-| ----------- | ------------ | ------------ |
+| ----------- | ------------ | ----------- |
 | **Windows** | x86, ARM64   | ✔️           |
 | **Linux**   | x86, ARM64   | ✔️           |
 | **macOS**   | x86, ARM64   | ✔️           |
