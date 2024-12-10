@@ -16,15 +16,15 @@ Acoustic echo cancellation in Rust based on [speexdsp](https://github.com/xiph/s
 
 ## Supported Platforms
 
-| Platform    | Architecture | Supported ✔️ |
-| ----------- | ------------ | ----------- |
-| **Windows** | x86, ARM64   | ✔️           |
-| **Linux**   | x86, ARM64   | ✔️           |
-| **macOS**   | x86, ARM64   | ✔️           |
-| **Android** | ARM64        | ✔️           |
-| **iOS**     | ARM64        | ✔️           |
-| **WASM**    | -            | ✔️           |
-| **RISC-V**  | RISC-V64     | ✔️           |
+| Platform    | Architecture | Supported   |
+| ----------- | ------------ | ----------  |
+| **Windows** | x86, ARM64   | ✔️          |
+| **Linux**   | x86, ARM64   | ✔️          |
+| **macOS**   | x86, ARM64   | ✔️          |
+| **Android** | ARM64        | ✔️          |
+| **iOS**     | ARM64        | ✔️          |
+| **WASM**    | wasm32       | ✔️          |
+| **RISC-V**  | RISC-V64     | ✔️          |
 
 # Install
 
