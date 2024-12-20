@@ -165,6 +165,7 @@ jobs:
         shell: bash
   checksum:
     runs-on: macos-latest
+    needs: build
     steps:
       - name: Checksums Action
         uses: thewh1teagle/checksum@v1
