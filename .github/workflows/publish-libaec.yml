@@ -168,3 +168,5 @@ jobs:
     steps:
       - name: Checksums Action
         uses: thewh1teagle/checksum@v1
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
