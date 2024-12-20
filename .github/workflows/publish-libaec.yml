@@ -163,3 +163,8 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
         shell: bash
+  checksum:
+    runs-on: macos-latest
+    steps:
+      - name: Checksums Action
+        uses: thewh1teagle/checksum@v1
