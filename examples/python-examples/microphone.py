@@ -12,7 +12,7 @@ import soundfile as sf
 import numpy as np
 import sys
 import pyaudio
-from pyaec import Aec
+from prx_pyaec import Aec
 import time
 
 # Parameters

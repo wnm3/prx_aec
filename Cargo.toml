@@ -5,11 +5,11 @@ members = ["crates/aec-rs-sys", "crates/libaec"]
 name = "aec-rs"
 version = "1.0.0"
 edition = "2021"
-authors = ["thewh1teagle"]
+authors = ["thewh1teagle","wnm3"]
 license = "MIT"
-repository = "https://github.com/thewh1teagle/aec"
+repository = "https://github.com/wnm3/prx_aec"
 description = "Acoustic echo cancellation in Rust"
-homepage = "https://github.com/thewh1teagle/aec"
+homepage = "https://github.com/wnm3/prx_aec"
 
 [dependencies]
 aec-rs-sys = { path = "crates/aec-rs-sys", version = "1.0.0" }

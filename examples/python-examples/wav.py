@@ -7,7 +7,7 @@ wget https://github.com/thewh1teagle/aec/releases/download/audio-files/echo.wav
 python3 wav.py rec.wav echo.wav output.wav
 """
 
-from pyaec import Aec
+from prx_pyaec import Aec
 import soundfile as sf
 import sys
 import numpy as np
