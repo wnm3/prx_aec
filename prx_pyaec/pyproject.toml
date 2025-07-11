@@ -1,7 +1,7 @@
 [project]
 name = "prx_pyaec"
-version = "2.0.1"
-description = "PRX Acoustic echo cancellation"
+version = "2.0.2"
+description = "PRX Acoustic echo cancellation with reset"
 readme = "README.md"
 authors = [
     { name = "wnm3", email = "wnmills3@gmail.com" },

@@ -75,6 +75,16 @@ impl Aec {
             }
         }
     }
+
+    #[cfg_attr(target_arch = "wasm32", wasm_bindgen)]
+    pub fn echo_state_reset(&self) {
+        unsafe {
+            aec_rs_sys::speex_echo_state_reset(
+                self.echo_state
+            )
+        }
+    }
+
 }
 
 impl Drop for Aec {

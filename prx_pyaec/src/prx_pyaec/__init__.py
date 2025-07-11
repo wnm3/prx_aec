@@ -43,6 +43,12 @@ lib.AecCancelEcho.argtypes = [
 ]
 lib.AecCancelEcho.restype = None
 
+lib.AecReset.argtypes = [
+    POINTER(AecHandle)
+]
+
+lib.AecReset.restype = None
+
 lib.AecDestroy.argtypes = [POINTER(AecHandle)]
 lib.AecDestroy.restype = None
 
@@ -72,6 +78,12 @@ class Aec:
         )
         return list(out_buffer)
 
+    def reset(self):
+        if self._aec:
+            lib.AecReset(
+                self._aec
+            )
+        
     def __del__(self):
         if self._aec:
             lib.AecDestroy(self._aec)

@@ -13,9 +13,9 @@ WHEEL_TAG="py3-none-macosx_11_0_arm64" uv build
 ```
 
 Publish locally using pip  
-**pip install --no-index --find-links=./dist/ prx_pyaec**
-then you can test with:
-**uv run --with prx_pyaec --no-project -- python -c "import prx_pyaec"**
+**pip install --no-index --find-links=./dist/ prx_pyaec**  
+then you can test with:  
+**uv run --with prx_pyaec --no-project -- python -c "import prx_pyaec"**  
 
 
 Publish to PyPi (optional -- you'll need a PyPi account and access token)

@@ -44,3 +44,12 @@ pub extern "C" fn AecDestroy(aec_ptr: *mut Aec) {
         };
     }
 }
+
+#[no_mangle]
+pub extern "C" fn AecReset(aec_ptr: *mut Aec) {
+    if let Some(aec) = unsafe { aec_ptr.as_ref() } {
+        if !aec_ptr.is_null() {
+                aec.echo_state_reset();
+            };
+    }
+}
