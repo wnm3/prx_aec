@@ -59,7 +59,7 @@ class Aec:
         self._aec = lib.AecNew(
             frame_size, filter_length, sample_rate, enable_preprocess
         )
-        if not self._aec:
+        if not if hasattr(self,"_aec") or not self._aec:
             raise RuntimeError("Failed to create AEC instance")
 
     def cancel_echo(self, rec_buffer, echo_buffer):
@@ -68,23 +68,23 @@ class Aec:
 
         frame_size = len(rec_buffer)
         out_buffer = (c_int16 * frame_size)()
-
-        lib.AecCancelEcho(
-            self._aec,
-            (c_int16 * frame_size)(*rec_buffer),
-            (c_int16 * frame_size)(*echo_buffer),
-            out_buffer,
-            frame_size,
-        )
+        if hasattr(self,"_aec") and self._aec:
+            lib.AecCancelEcho(
+                self._aec,
+                (c_int16 * frame_size)(*rec_buffer),
+                (c_int16 * frame_size)(*echo_buffer),
+                out_buffer,
+                frame_size,
+            )
         return list(out_buffer)
 
     def reset(self):
-        if self._aec:
+        if hasattr(self,"_aec") and self._aec:
             lib.AecReset(
                 self._aec
             )
         
     def __del__(self):
-        if self._aec:
+        if hasattr(self,"_aec") and self._aec:
             lib.AecDestroy(self._aec)
             self._aec = None
