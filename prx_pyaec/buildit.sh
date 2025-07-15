@@ -4,6 +4,8 @@ echo "Ensure you are in the prx_pyaec subdirectory. Enter to continue, Ctrl+C to
 read
 
 rm -fr ../target
+rm -fr dist
+mkdir dist
 cargo build -p libaec --release
 cp -rf ../target/release/libaec.dylib src/prx_pyaec/
 WHEEL_TAG="py3-none-macosx_11_0_arm64" uv build
