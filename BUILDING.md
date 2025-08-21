@@ -1,8 +1,17 @@
 # Building
 
+Ensure you have installed rust:
+brew install rust
+
+Ensure you have installed cmake:
+brew install cmake
+
+
 ```console
-git clone https://github.com/thewh1teagle/aec --recursive
-cd aec-rs
+git clone https://github.com/wnm3/prx_aec --recursive
+cd prx_aec
+git submodule init
+git submodule update
 cargo build
 ```
 
@@ -10,7 +19,7 @@ Useful website for comparesion:
 
 https://fjiang9.github.io/NKF-AEC/
 
-## Publish crates
+## Publish crates (skip this step)
 
 ```console
 cd crates/aec-rs-sys
@@ -71,7 +80,12 @@ CC=emcc AR=emar wasm-pack build
 
 Use [uv](https://astral.sh/blog/uv)
 
+Note: if building for MacOS on intel substitute:  
+WHEEL_TAG="py3-none-macosx_10_12_x86_64"  
+below...  
+
 ```console
+cd prx_pyaec
 cargo build -p libaec --release
 cp -rf ../target/release/libaec.dylib src/pyaec/
 WHEEL_TAG="py3-none-macosx_11_0_arm64" uv build
