@@ -59,7 +59,7 @@ class Aec:
         self._aec = lib.AecNew(
             frame_size, filter_length, sample_rate, enable_preprocess
         )
-        if not if hasattr(self,"_aec") or not self._aec:
+        if not hasattr(self,"_aec") or not self._aec:
             raise RuntimeError("Failed to create AEC instance")
 
     def cancel_echo(self, rec_buffer, echo_buffer):
